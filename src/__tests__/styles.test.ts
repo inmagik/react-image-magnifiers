@@ -29,7 +29,7 @@ describe("getZoomContainerStyle", () => {
     expect(style.left).toBe("0px");
   });
 
-  it("returns correct left property when inPlace is true", () => {
+  it("returns correct left property when inPlace is false", () => {
     const style = styles.getZoomContainerStyle(400, 500, false, false);
     expect(style.left).toBe("400px");
   });
