@@ -2,7 +2,7 @@ import styles from "../styles";
 
 describe("getLargeImageStyle", () => {
   it("returns correct transform property", () => {
-    const style = styles.getLargeImageStyle(10, 15);
+    const style = styles.getLargeImageStyle(10, 15, false);
     expect(style.transform).toBe("translate(10px, 15px)");
   });
 
@@ -19,24 +19,24 @@ describe("getLargeImageStyle", () => {
 
 describe("getZoomContainerStyle", () => {
   it("returns correct width & height properties", () => {
-    const style = styles.getZoomContainerStyle(400, 500);
+    const style = styles.getZoomContainerStyle(400, 500, false, false);
     expect(style.width).toBe("400px");
     expect(style.height).toBe("500px");
   });
 
   it("returns correct left property when inPlace is true", () => {
-    const style = styles.getZoomContainerStyle(400, 500, true);
+    const style = styles.getZoomContainerStyle(400, 500, true, false);
     expect(style.left).toBe("0px");
   });
 
   it("returns correct left property when inPlace is true", () => {
-    const style = styles.getZoomContainerStyle(400, 500, false);
+    const style = styles.getZoomContainerStyle(400, 500, false, false);
     expect(style.left).toBe("400px");
   });
 });
 
 describe("getOverlayCenterStyle", () => {
-  const style = styles.getOverlayCenterStyle(400, 500, 20, 30, 0.8, 0.3);
+  const style = styles.getOverlayCenterStyle(400, 500, 20, 30, 0.8, 0.3, "#fff");
 
   it("returns correct width & height properties", () => {
     expect(style.width).toBe("400px");
@@ -57,7 +57,7 @@ describe("getOverlayCenterStyle", () => {
 });
 
 describe("getOverlayTopStyle", () => {
-  const style = styles.getOverlayTopStyle(400, 500, 0.8, 0.3);
+  const style = styles.getOverlayTopStyle(400, 500, 0.8, 0.3, "rgba(0,0,0,.4)");
 
   it("returns correct width & height properties", () => {
     expect(style.width).toBe("400px");
@@ -74,17 +74,17 @@ describe("getOverlayTopStyle", () => {
 });
 
 describe("getOverlayLeftStyle", () => {
-  const style = styles.getOverlayLeftStyle(400, 500, 10, 0.8, 0.3);
+  const style = styles.getOverlayLeftStyle(400, 500, 10, 0.8, 0.3, "rgba(0,0,0,.4)");
   runOverlayTests(style);
 });
 
 describe("getOverlayRightStyle", () => {
-  const style = styles.getOverlayRightStyle(400, 500, 10, 0.8, 0.3);
+  const style = styles.getOverlayRightStyle(400, 500, 10, 0.8, 0.3, "rgba(0,0,0,.4)");
   runOverlayTests(style);
 });
 
 describe("getOverlayBottomStyle", () => {
-  const style = styles.getOverlayBottomStyle(400, 500, 10, 0.8, 0.3);
+  const style = styles.getOverlayBottomStyle(400, 500, 10, 0.8, 0.3, "rgba(0,0,0,.4)");
   runOverlayTests(style);
 });
 

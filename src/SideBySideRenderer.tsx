@@ -3,8 +3,9 @@ import utils from "./utils";
 import styles from "./styles";
 import Image from "./Image";
 import ImagePreviewOverlay from "./ImagePreviewOverlay";
+import { RendererProps } from "./types";
 
-const SideBySideRenderer = props => {
+const SideBySideRenderer: React.FC<Partial<RendererProps>> = (props) => {
   const {
     itemPosition,
     active,
@@ -41,12 +42,12 @@ const SideBySideRenderer = props => {
     zoomContainerBoxShadow
   } = props;
 
-  const zoomContainerDimensions = {
+  const zoomContainerDimensions: any = {
     width: elementDimensions.width,
     height: elementDimensions.height
   };
 
-  const zoomContainerStyle = {};
+  const zoomContainerStyle: any = {};
 
   let availableWidth = 0;
   let availableHeight = 0;
@@ -129,7 +130,7 @@ const SideBySideRenderer = props => {
     height: elementDimensions.height
   };
 
-  const previewSize = {
+  const previewSize: any = {
     width: Math.floor(
       smallImageSize.width *
         (zoomContainerDimensions.width / itemDimensions.width)

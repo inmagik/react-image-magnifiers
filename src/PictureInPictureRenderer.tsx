@@ -3,8 +3,9 @@ import utils from "./utils";
 import styles from "./styles";
 import Image from "./Image";
 import ImagePreviewOverlay from "./ImagePreviewOverlay";
+import { RendererProps } from "./types";
 
-const PictureInPictureRenderer = props => {
+const PictureInPictureRenderer: React.FC<Partial<RendererProps>> = (props) => {
   const {
     active,
     itemPosition,
@@ -29,7 +30,8 @@ const PictureInPictureRenderer = props => {
     cursorStyleActive,
     onLoadRefresh,
     onImageLoad,
-    onLargeImageLoad
+    onLargeImageLoad,
+    transitionSpeed = 0.4
   } = props;
 
   const sizeMult = 100 / previewSizePercentage;
@@ -59,7 +61,7 @@ const PictureInPictureRenderer = props => {
     height: elementDimensions.height
   };
 
-  const previewSize = {
+  const previewSize: any = {
     width: Math.floor(
       smallImageSize.width *
         (smallImageSize.width / itemDimensions.width) *
@@ -159,7 +161,8 @@ const PictureInPictureRenderer = props => {
           ...styles.getZoomContainerStyle(
             smallImageSize.width,
             smallImageSize.height,
-            true
+            true,
+            false
           ),
           width: containerWidth + "px",
           height: elementDimensions.height * sizeMult + "px",
@@ -206,6 +209,7 @@ const PictureInPictureRenderer = props => {
         overlayBoxColor={previewOverlayBoxColor}
         overlayBoxImage={previewOverlayBoxImage}
         overlayBoxImageSize={previewOverlayBoxImageSize}
+        transitionSpeed={transitionSpeed}
         active={legalSize}
       />
     </div>

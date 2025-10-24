@@ -1,30 +1,43 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { defaultState } from "react-input-position";
 import utils from "./utils";
+import { MagnifierContainerProps } from "./types";
 
-export const MagnifierContext = React.createContext();
+interface ContainerDimensions {
+  width: number;
+  height: number;
+  left: number;
+  right: number;
+  top: number;
+  bottom: number;
+}
 
-class MagnifierContainer extends Component {
-  state = {
+interface PreviewSize {
+  width: number;
+  height: number;
+  left?: number;
+  right?: number;
+  top?: number;
+  bottom?: number;
+}
+
+interface MagnifierContainerState {
+  inputPositionState: any;
+}
+
+export const MagnifierContext = React.createContext<any>(null);
+
+class MagnifierContainer extends Component<MagnifierContainerProps, MagnifierContainerState> {
+
+  state: MagnifierContainerState = {
     inputPositionState: defaultState
   };
-  zoomContainerRef = React.createRef();
-  zoomImageRef = React.createRef();
+
+  zoomContainerRef = React.createRef<HTMLDivElement>();
+  zoomImageRef = React.createRef<HTMLImageElement>();
   zoomImageDimensions = { width: 0, height: 0 };
 
-  static propTypes = {
-    className: PropTypes.string,
-    style: PropTypes.object,
-    autoInPlace: PropTypes.bool,
-    inPlaceMinBreakpoint: PropTypes.number
-  };
-
-  static defaultProps = {
-    inPlaceMinBreakpoint: 0
-  };
-
-  getZoomContainerDimensions = () => {
+  getZoomContainerDimensions = (): ContainerDimensions => {
     if (!this.zoomContainerRef.current) {
       return { width: 0, height: 0, left: 0, right: 0, top: 0, bottom: 0 };
     }
@@ -52,12 +65,12 @@ class MagnifierContainer extends Component {
     return this.zoomImageDimensions;
   }
 
-  onUpdate = changes => {
+  onUpdate = (changes: any) => {
     this.setState({ inputPositionState: changes });
   };
 
-  onZoomImageLoad = e => {
-    const rect = e.target.getBoundingClientRect();
+  onZoomImageLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
+    const rect = (e.target as HTMLImageElement).getBoundingClientRect();
     this.zoomImageDimensions = {
       width: rect.width,
       height: rect.height
@@ -83,7 +96,7 @@ class MagnifierContainer extends Component {
     const zoomImageDimensions = this.getZoomImageDimensions();
 
     let inPlace = false;
-    const { autoInPlace, inPlaceMinBreakpoint } = this.props;
+    const { autoInPlace, inPlaceMinBreakpoint = 0 } = this.props;
 
     if (autoInPlace || inPlaceMinBreakpoint) {
       try {
@@ -105,7 +118,7 @@ class MagnifierContainer extends Component {
       height: elementDimensions.height
     };
 
-    const previewSize = {
+    const previewSize: PreviewSize = {
       width: Math.floor(
         smallImageSize.width *
           (zoomContainerDimensions.width / zoomImageDimensions.width)

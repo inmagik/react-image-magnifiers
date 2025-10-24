@@ -1,7 +1,7 @@
 import React from "react";
 import utils from "./utils";
 
-interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
   onImageLoad?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
   onLoadRefresh?: () => void;
   src: string | string[];

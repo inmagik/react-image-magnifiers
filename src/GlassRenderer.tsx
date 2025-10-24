@@ -2,8 +2,9 @@ import React from "react";
 import utils from "./utils";
 import Image from "./Image";
 import styles from "./styles";
+import { GlassRendererProps } from "./types";
 
-const GlassRenderer = props => {
+const GlassRenderer: React.FC<Partial<GlassRendererProps>> = (props) => {
   const {
     itemRef,
     itemPosition,
@@ -69,7 +70,8 @@ const GlassRenderer = props => {
           ...styles.getZoomContainerStyle(
             magnifierSizeNum,
             magnifierSizeNum,
-            true
+            true,
+            false
           ),
           visibility: !isActive ? "hidden" : "visible",
           borderRadius,
