@@ -1,14 +1,20 @@
-function invertNumber(min, max, num) {
+function invertNumber(min: number, max: number, num: number): number {
   return max + min - num;
 }
 
-function convertRange(oldMin, oldMax, newMin, newMax, oldValue) {
+function convertRange(
+  oldMin: number,
+  oldMax: number,
+  newMin: number,
+  newMax: number,
+  oldValue: number
+): number {
   const percent = (oldValue - oldMin) / (oldMax - oldMin);
   const result = percent * (newMax - newMin) + newMin;
   return result || 0;
 }
 
-function convertWidthToPx(width, containerWidth) {
+function convertWidthToPx(width: number | string, containerWidth?: number): number {
   if (typeof width === "number") {
     return width;
   }
@@ -17,7 +23,7 @@ function convertWidthToPx(width, containerWidth) {
   }
   if (width.substr(-1) === "%") {
     const percent = 100 / Number(width.slice(0, -1));
-    return containerWidth / percent;
+    return containerWidth! / percent;
   }
   if (width.substr(-2) === "px") {
     return Number(width.slice(0, -2));
@@ -25,14 +31,14 @@ function convertWidthToPx(width, containerWidth) {
   return Number(width);
 }
 
-function convertWidthToString(width) {
+function convertWidthToString(width: number | string): string {
   if (typeof width === "number") {
     return width + "px";
   }
   return width;
 }
 
-function noop() {}
+function noop(): void {}
 
 export default {
   invertNumber,

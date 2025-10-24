@@ -15,8 +15,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        use: ["babel-loader", "eslint-loader"],
+        test: /\.(ts|tsx|js|jsx)$/,
+        use: ["babel-loader"],
         exclude: /node_modules/
       },
       {
@@ -31,7 +31,7 @@ module.exports = {
   },
   plugins: [htmlWebpackPlugin],
   resolve: {
-    extensions: [".js", ".jsx"]
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   devServer: {
     port: 3001
