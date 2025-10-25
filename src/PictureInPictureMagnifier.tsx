@@ -1,48 +1,13 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import utils from "./utils";
 import ReactInputPosition, {
   TOUCH_ACTIVATION,
   MOUSE_ACTIVATION
 } from "react-input-position";
 import PictureInPictureRenderer from "./PictureInPictureRenderer";
+import { PictureInPictureMagnifierProps } from "./types";
 
-class PictureInPictureMagnifier extends Component {
-  containerRef = React.createRef();
-
-  static propTypes = {
-    imageSrc: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string)
-    ]),
-    largeImageSrc: PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.arrayOf(PropTypes.string)
-    ]),
-    imageAlt: PropTypes.string,
-    previewSizePercentage: PropTypes.number,
-    previewHorizontalPos: PropTypes.oneOf(["left", "right"]),
-    previewVerticalPos: PropTypes.oneOf(["top", "bottom"]),
-    previewOpacity: PropTypes.number,
-    previewOverlayOpacity: PropTypes.number,
-    previewOverlayBoxOpacity: PropTypes.number,
-    previewOverlayBackgroundColor: PropTypes.string,
-    previewOverlayBoxColor: PropTypes.string,
-    previewOverlayBoxImage: PropTypes.string,
-    previewOverlayBoxImageSize: PropTypes.string,
-    cursorStyle: PropTypes.string,
-    cursorStyleActive: PropTypes.string,
-    shadow: PropTypes.bool,
-    shadowColor: PropTypes.string,
-    renderOverlay: PropTypes.func,
-    className: PropTypes.string,
-    style: PropTypes.object,
-    onImageLoad: PropTypes.func,
-    onLargeImageLoad: PropTypes.func,
-    onZoomStart: PropTypes.func,
-    onZoomEnd: PropTypes.func
-  };
-
+class PictureInPictureMagnifier extends Component<PictureInPictureMagnifierProps> {
   static defaultProps = {
     imageSrc: "",
     largeImageSrc: "",
@@ -58,36 +23,38 @@ class PictureInPictureMagnifier extends Component {
     previewOverlayBoxImage: "",
     previewOverlayBoxImageSize: "",
     cursorStyle: "crosshair",
-    cursorStyleActive: "",
+    shadow: false,
     shadowColor: "rgba(0,0,0,.4)",
     onImageLoad: utils.noop,
     onLargeImageLoad: utils.noop
   };
+
+  containerRef = React.createRef<HTMLDivElement>();
 
   render() {
     const {
       imageSrc,
       largeImageSrc,
       imageAlt,
-      previewSizePercentage,
-      previewHorizontalPos,
-      previewVerticalPos,
-      previewOpacity,
-      previewOverlayOpacity,
-      previewOverlayBoxOpacity,
-      previewOverlayBackgroundColor,
-      previewOverlayBoxColor,
+      previewSizePercentage = 35,
+      previewHorizontalPos = "left",
+      previewVerticalPos = "bottom",
+      previewOpacity = 0.8,
+      previewOverlayOpacity = 0.4,
+      previewOverlayBoxOpacity = 0.8,
+      previewOverlayBackgroundColor = "#000",
+      previewOverlayBoxColor = "#fff",
       previewOverlayBoxImage,
       previewOverlayBoxImageSize,
-      cursorStyle,
+      cursorStyle = "crosshair",
       cursorStyleActive,
-      shadow,
-      shadowColor,
+      shadow = false,
+      shadowColor = "rgba(0,0,0,.4)",
       renderOverlay,
       className,
       style,
-      onImageLoad,
-      onLargeImageLoad,
+      onImageLoad = utils.noop,
+      onLargeImageLoad = utils.noop,
       onZoomStart,
       onZoomEnd
     } = this.props;
@@ -97,7 +64,7 @@ class PictureInPictureMagnifier extends Component {
         ref={this.containerRef}
         style={{
           ...style,
-          textAlign: previewHorizontalPos,
+          textAlign: previewHorizontalPos as any,
           overflow: "hidden",
           fontSize: "0"
         }}

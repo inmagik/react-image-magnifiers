@@ -1,4 +1,10 @@
-function getLargeImageStyle(positionX, positionY, active) {
+import { CSSProperties } from 'react';
+
+function getLargeImageStyle(
+  positionX: number,
+  positionY: number,
+  active: boolean
+): CSSProperties {
   return {
     position: "absolute",
     boxSizing: "border-box",
@@ -12,8 +18,13 @@ function getLargeImageStyle(positionX, positionY, active) {
   };
 }
 
-function getZoomContainerStyle(width, height, inPlace, switchSides) {
-  const style = {
+function getZoomContainerStyle(
+  width: number,
+  height: number,
+  inPlace: boolean,
+  switchSides: boolean
+): CSSProperties {
+  const style: CSSProperties = {
     position: "absolute",
     boxSizing: "border-box",
     pointerEvents: "none",
@@ -35,17 +46,17 @@ function getZoomContainerStyle(width, height, inPlace, switchSides) {
 }
 
 function getOverlayCenterStyle(
-  width,
-  height,
-  left,
-  top,
-  opacity,
-  transitionSpeed,
-  color,
-  backgroundImage,
-  backgroundImageSize
-) {
-  const backgroundStyle = {};
+  width: number,
+  height: number,
+  left: number,
+  top: number,
+  opacity: number,
+  transitionSpeed: number,
+  color: string,
+  backgroundImage?: string,
+  backgroundImageSize?: string
+): CSSProperties {
+  const backgroundStyle: CSSProperties = {};
 
   if (backgroundImage) {
     backgroundStyle.backgroundImage = `url("${backgroundImage}")`;
@@ -73,12 +84,12 @@ function getOverlayCenterStyle(
 }
 
 function getOverlayTopStyle(
-  width,
-  height,
-  opacity,
-  transitionSpeed,
-  backgroundColor
-) {
+  width: number,
+  height: number,
+  opacity: number,
+  transitionSpeed: number,
+  backgroundColor: string
+): CSSProperties {
   return {
     backgroundColor: backgroundColor,
     position: "absolute",
@@ -96,13 +107,13 @@ function getOverlayTopStyle(
 }
 
 function getOverlayLeftStyle(
-  width,
-  height,
-  top,
-  opacity,
-  transitionSpeed,
-  backgroundColor
-) {
+  width: number,
+  height: number,
+  top: number,
+  opacity: number,
+  transitionSpeed: number,
+  backgroundColor: string
+): CSSProperties {
   return {
     backgroundColor: backgroundColor,
     position: "absolute",
@@ -120,13 +131,13 @@ function getOverlayLeftStyle(
 }
 
 function getOverlayRightStyle(
-  width,
-  height,
-  top,
-  opacity,
-  transitionSpeed,
-  backgroundColor
-) {
+  width: number,
+  height: number,
+  top: number,
+  opacity: number,
+  transitionSpeed: number,
+  backgroundColor: string
+): CSSProperties {
   return {
     backgroundColor: backgroundColor,
     position: "absolute",
@@ -144,13 +155,13 @@ function getOverlayRightStyle(
 }
 
 function getOverlayBottomStyle(
-  width,
-  height,
-  top,
-  opacity,
-  transitionSpeed,
-  backgroundColor
-) {
+  width: number,
+  height: number,
+  top: number,
+  opacity: number,
+  transitionSpeed: number,
+  backgroundColor: string
+): CSSProperties {
   return {
     backgroundColor: backgroundColor,
     position: "absolute",
@@ -166,7 +177,7 @@ function getOverlayBottomStyle(
   };
 }
 
-function getMagnifierZoomStyle(active, transitionSpeed) {
+function getMagnifierZoomStyle(active: boolean, transitionSpeed: number): CSSProperties {
   return {
     position: "relative",
     opacity: active ? 1 : 0,

@@ -1,12 +1,19 @@
 import React from "react";
 import utils from "./utils";
 
-const Image = React.forwardRef(function(props, ref) {
-  const { onImageLoad, onLoadRefresh, src, alt, ...otherProps } = props;
+interface ImageProps extends Omit<React.ImgHTMLAttributes<HTMLImageElement>, 'src'> {
+  onImageLoad?: (e: React.SyntheticEvent<HTMLImageElement>) => void;
+  onLoadRefresh?: () => void;
+  src: string | string[];
+  alt?: string;
+}
+
+const Image = React.forwardRef<HTMLImageElement, ImageProps>(function Image(props, ref) {
+  const { onImageLoad = utils.noop, onLoadRefresh = utils.noop, src, alt, ...otherProps } = props;
 
   const [imageIdx, setImageIdx] = React.useState(0);
   const imageErrorRef = React.useRef(false);
-  const imageArr = src.constructor === Array ? src : [src];
+  const imageArr = Array.isArray(src) ? src : [src];
 
   return (
     <img
@@ -20,7 +27,7 @@ const Image = React.forwardRef(function(props, ref) {
           onLoadRefresh();
         }
       }}
-      onError={e => {
+      onError={_e => {
         if (imageIdx < imageArr.length) {
           imageErrorRef.current = true;
           setImageIdx(idx => idx + 1);
@@ -30,10 +37,5 @@ const Image = React.forwardRef(function(props, ref) {
     />
   );
 });
-
-Image.defaultProps = {
-  onImageLoad: utils.noop,
-  onLoadRefresh: utils.noop
-};
 
 export default Image;

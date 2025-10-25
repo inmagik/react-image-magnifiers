@@ -2,8 +2,9 @@ import React from "react";
 import Image from "./Image";
 import ImagePreviewOverlay from "./ImagePreviewOverlay";
 import styles from "./styles";
+import { RendererProps } from "./types";
 
-function MagnifierPreviewRenderer(props) {
+const MagnifierPreviewRenderer: React.FC<Partial<RendererProps>> = (props) => {
   const {
     image,
     largeImage,

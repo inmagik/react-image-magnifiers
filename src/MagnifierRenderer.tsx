@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "./Image";
 import styles from "./styles";
+import { RendererProps } from "./types";
 
-const MagnifierRenderer = props => {
+const MagnifierRenderer: React.FC<Partial<RendererProps>> = (props) => {
   const {
     itemPosition,
     active,
@@ -13,8 +14,8 @@ const MagnifierRenderer = props => {
     imageAlt,
     itemRef,
     renderOverlay,
-    cursorStyle,
-    cursorStyleActive,
+    cursorStyle = "zoom-in",
+    cursorStyleActive = "zoom-out",
     onImageLoad,
     onLargeImageLoad,
     onLoadRefresh
@@ -45,7 +46,8 @@ const MagnifierRenderer = props => {
         style={styles.getZoomContainerStyle(
           elementDimensions.width,
           elementDimensions.height,
-          true
+          true,
+          false
         )}
       >
         <Image

@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./styles";
+import { ImagePreviewOverlayProps } from "./types";
 
-const ImagePreviewOverlay = props => {
+const ImagePreviewOverlay: React.FC<ImagePreviewOverlayProps> = (props) => {
   const {
     previewWidth,
     previewHeight,
@@ -80,16 +81,6 @@ const ImagePreviewOverlay = props => {
       ></div>
     </React.Fragment>
   );
-};
-
-ImagePreviewOverlay.defaultProps = {
-  overlayOpacity: 0.5,
-  overlayBoxOpacity: 0.8,
-  transitionSpeed: 0.4,
-  overlayBackgroundColor: "#000",
-  overlayBoxColor: "#fff",
-  overlayBoxImage: "",
-  overlayBoxImageSize: ""
 };
 
 export default ImagePreviewOverlay;
