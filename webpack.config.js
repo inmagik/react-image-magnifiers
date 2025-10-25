@@ -20,8 +20,8 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.(jpg|jpeg|png)$/,
-        use: "file-loader"
+        test: /\.(jpg|jpeg|png|ico)$/,
+        type: "asset/resource"
       },
       {
         test: /\.css$/,
